@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformBot", "PlatformBot\PlatformBot.csproj", "{711E6DEC-4CC8-4F0F-9512-7E162435697A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformBot.Core", "PlatformBot.Core\PlatformBot.Core.csproj", "{711E6DEC-4CC8-4F0F-9512-7E162435697A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

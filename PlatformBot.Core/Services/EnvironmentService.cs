@@ -1,4 +1,4 @@
-﻿namespace PlatformBot.Services;
+﻿namespace PlatformBot.Core.Services;
 
 public class EnvironmentService
 {
