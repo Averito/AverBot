@@ -1,4 +1,4 @@
-﻿namespace PlatformBot.Core.Services;
+﻿namespace AverBot.Core.Handlers;
 
 public class EnvironmentService
 {
