@@ -5,7 +5,7 @@ namespace AverBot.Core.Commands;
 public class DivineCommand : MainCommandModule
 {
     [Command("шар")]
-    public async Task Devine(string input)
+    public async Task Devine([Remainder] string input)
     {
         if (string.IsNullOrEmpty(input))
         {
