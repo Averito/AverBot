@@ -7,9 +7,9 @@ namespace AverBot.Core.Interactions;
 public class KickUserInteraction : MainInteractionModule
 {
     [SlashCommand("kick", "Кикнуть пользователя с сервера")]
-    public async Task KickUser(SocketUser socketUser, string reason)
+    public async Task KickUser(SocketUser user, string reason)
     {
-        var guildUser = (SocketGuildUser?)socketUser;
+        var guildUser = (SocketGuildUser?)user;
         if (guildUser == null) return;
 
         if (CurrentUser != null && !CurrentUser.GuildPermissions.KickMembers)
