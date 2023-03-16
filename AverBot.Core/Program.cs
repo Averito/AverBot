@@ -7,11 +7,10 @@ environmentsService.EnvironmentsLoad();
 
 var startupService = new StartupService();
 
+await startupService.RegisterCommandsAsync();
+await startupService.SubscribeDiscordEventsAsync();
 await startupService.LoginDiscordAsync();
 await startupService.SetDiscordActivityAsync(new WatchingActivity("на Арину"));
-await startupService.SubscribeDiscordEventsAsync();
-await startupService.InstallCommandsAsync();
-await startupService.InstallAttributesAsync();
 await startupService.StartDiscordAsync();
 
 await Task.Delay(-1);

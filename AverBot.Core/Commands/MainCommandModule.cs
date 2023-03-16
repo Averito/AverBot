@@ -1,11 +1,13 @@
 ﻿using Discord;
+using Discord.Commands;
 using Discord.WebSocket;
 
-namespace AverBot.Core.Handlers;
+namespace AverBot.Core.Commands;
 
-public class UserService
+public class MainCommandModule : ModuleBase<SocketCommandContext>
 {
-    public async Task<IUser> GetRandomUser(SocketMessage message)
+    public SocketGuildUser? CurrentUser => (SocketGuildUser?)Context.User;
+    public async Task<IUser> GetRandomUser(SocketUserMessage message)
     {
         var rnd = new Random();
 
