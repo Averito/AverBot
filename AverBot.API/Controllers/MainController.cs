@@ -1,5 +1,4 @@
-﻿using AverBot.API.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace AverBot.API.Controllers;
 

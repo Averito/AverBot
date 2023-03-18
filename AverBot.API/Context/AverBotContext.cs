@@ -6,6 +6,7 @@ namespace AverBot.API.Context;
 public class AverBotContext : DbContext
 {
     public DbSet<User> Users { get; set; }
+    public DbSet<Server> Servers { get; set; }
 
     public AverBotContext()
     {
@@ -26,10 +27,21 @@ public class AverBotContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.Entity<User>(entity => {
+        builder.Entity<User>(entity =>
+        {
             entity.HasIndex(user => user.DiscordId).IsUnique();
         });
-        
+
+        builder.Entity<User>()
+            .HasMany(user => user.Servers)
+            .WithOne(server => server.User)
+            .HasForeignKey(server => server.UserId)
+            .IsRequired();
+
+        builder.Entity<Server>(entity => {
+            entity.HasIndex(server => server.DiscordId).IsUnique();
+        });
+
         base.OnModelCreating(builder);
     }
 }

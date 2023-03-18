@@ -1,4 +1,5 @@
-﻿using AverBot.API.DTO;
+﻿using System.Security.Claims;
+using AverBot.API.DTO;
 using AverBot.API.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,8 @@ public class AuthController : MainController<AuthController>
     public async Task<ActionResult<RegistrationResponseDTO>> Registration(RegistrationDTO registrationDto) =>
         CreatedAtAction(nameof(Registration), await _authService.Registration(registrationDto));
 
-    [HttpPost("Login")]
+
+        [HttpPost("Login")]
     public async Task<ActionResult<LoginResponseDTO>> Login(LoginDTO loginDto) =>
         CreatedAtAction(nameof(Login), await _authService.Login(loginDto));
 }

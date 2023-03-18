@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using AverBot.API.DTO;
 using AverBot.API.Models;
 using AverBot.API.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -5,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AverBot.API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class UserController : MainController<UserController>
@@ -15,17 +18,16 @@ public class UserController : MainController<UserController>
     {
         _userService = userService;
     }
-
-    [Authorize]
+    
     [HttpGet("{id}")]
-    public async Task<ActionResult<List<User>>> GetById(int id)
-    {
-        return Ok(await _userService.GetUserById(id));
-    }
+    public async Task<ActionResult<List<User>>> GetById(int id) => 
+        Ok(await _userService.GetUserById(id));
+
 
     [HttpPatch("Edit")]
-    public async Task<ActionResult<User>> Edit(User user)
+    public async Task<ActionResult<User>> Edit(EditUserDTO editUserDto)
     {
-        return CreatedAtAction(nameof(Edit), await _userService.EditUser(user));
+        var currentUser = await _userService.Me(HttpContext);
+        return CreatedAtAction(nameof(Edit), await _userService.EditUser(currentUser, editUserDto));
     }
 }
