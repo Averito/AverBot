@@ -1,7 +1,7 @@
-﻿using AverBot.API.Main.Models;
+﻿using AverBot.API.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace AverBot.API.Main.Context;
+namespace AverBot.API.Context;
 
 public class AverBotContext : DbContext
 {

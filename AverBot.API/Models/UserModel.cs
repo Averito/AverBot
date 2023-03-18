@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
-using AverBot.API.Main.DTO;
+using AverBot.API.DTO;
 
-namespace AverBot.API.Main.Models;
+namespace AverBot.API.Models;
 
 public class User
 {
@@ -31,20 +31,12 @@ public class User
     [JsonPropertyName("avatar")]
     public string? Avatar { get; set; }
 
-    public User(int id, ulong discordId, string username, int discriminator,
-        string? avatar = null)
+    public User() {}
+    public User(RegistrationDTO registrationDto)
     {
-        Id = id;
-        DiscordId = discordId;
-        Username = username;
-        Discriminator = discriminator;
-        Avatar = avatar;
-    }
-    public User(CreateUserDTO createUserDto)
-    {
-        DiscordId = createUserDto.DiscordId;
-        Username = createUserDto.Username;
-        Discriminator = createUserDto.Discriminator;
-        Avatar = createUserDto.Avatar;
+        DiscordId = registrationDto.DiscordId;
+        Username = registrationDto.Username;
+        Discriminator = registrationDto.Discriminator;
+        Avatar = registrationDto.Avatar;
     }
 }

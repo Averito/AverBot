@@ -1,22 +1,20 @@
-﻿namespace AverBot.Core.Handlers;
+﻿namespace AverBot.Core.Services;
 
 public class EnvironmentService
 {
-    private string _path { get; }
-    public string Path
-    {
-        get => _path;
-    }
+    private string Path { get; }
 
     public EnvironmentService(string path)
     {
-        _path = path;
+        Path = path;
     }
 
     public void EnvironmentsLoad()
     {
-        foreach (var environmentVar in File.ReadAllLines(_path))
+        foreach (var environmentVar in File.ReadAllLines(Path))
         {
+            if (string.IsNullOrEmpty(environmentVar)) continue;
+            
             var entries = environmentVar.Split("=");
             Environment.SetEnvironmentVariable(entries[0], entries[1]);   
         }

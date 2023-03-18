@@ -1,5 +1,4 @@
 using AverBot.Core.Activities;
-using AverBot.Core.Handlers;
 using AverBot.Core.Services;
 
 var environmentsService = new EnvironmentService(@"D:\Averito\CSharp\AverBot\AverBot.Core\.env");

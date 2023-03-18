@@ -1,4 +1,4 @@
-﻿namespace AverBot.API.Main.Services;
+﻿namespace AverBot.API.Services;
 
 public class EnvironmentService
 {
@@ -13,6 +13,8 @@ public class EnvironmentService
     {
         foreach (var environmentVar in File.ReadAllLines(Path))
         {
+            if (string.IsNullOrEmpty(environmentVar)) continue;
+            
             var entries = environmentVar.Split("=");
             Environment.SetEnvironmentVariable(entries[0], entries[1]);   
         }
