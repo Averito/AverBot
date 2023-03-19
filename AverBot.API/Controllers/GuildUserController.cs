@@ -21,4 +21,8 @@ public class GuildUserController : MainController<GuildUserController>
     [HttpPost("Create/{serverId}")]
     public async Task<ActionResult<GuildUser>> Create(CreateGuildUserDTO createGuildUserDto, int serverId) =>
         CreatedAtAction(nameof(Create), await _guildUserService.Create(createGuildUserDto, serverId));
+    
+    [HttpPost("AddToServer")]
+    public async Task<ActionResult<GuildUser>> AddToServer(AddToServerDTO addToServerDto) =>
+        CreatedAtAction(nameof(AddToServer), await _guildUserService.AddToServer(addToServerDto));
 }

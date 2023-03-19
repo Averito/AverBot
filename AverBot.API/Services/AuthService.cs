@@ -114,6 +114,17 @@ public class AuthService
                 context.Response.Headers.Append("Content-Type", "application/json");
                 var jsonError = JsonConvert.SerializeObject(new UnauthorizedError(401, "You are not authorized"));
                 await context.Response.WriteAsync(jsonError);
+            },
+            OnMessageReceived = context =>
+            {
+                var accessToken = context.Request.Query["access_token"];
+
+                var path = context.HttpContext.Request.Path;
+                if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/Hubs/Warns"))
+                {
+                    context.Token = accessToken;
+                }
+                return Task.CompletedTask;
             }
         };
     }

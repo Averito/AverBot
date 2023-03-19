@@ -16,17 +16,12 @@ public class GuildUser : BaseModel
     [Required]
     [JsonPropertyName("username")]
     public string Username { get; set; }
-    
+
     [Column("discriminator")]
     [Required]
     [JsonPropertyName("discriminator")]
     public int Discriminator { get; set; }
-    
-    [Column("warns_limit")]
-    [Required]
-    [JsonPropertyName("warnsLimit")]
-    public int WarnsLimit { get; set; }
-    
+
     [Column("warns")]
     [JsonPropertyName("warns")]
     public List<Warn> Warns { get; set; }
@@ -42,6 +37,5 @@ public class GuildUser : BaseModel
         DiscordId = createGuildUserDto.DiscordId;
         Username = createGuildUserDto.Username;
         Discriminator = createGuildUserDto.Discriminator;
-        WarnsLimit = createGuildUserDto.WarnsLimit;
     }
 }

@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using AverBot.API.DTO;
 
 namespace AverBot.API.Models;
 
-public class ServerGuildUser : BaseModel
+public class ServerGuildUser
 {
     [Column("server")]
     [JsonPropertyName("server")]

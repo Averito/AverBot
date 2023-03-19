@@ -25,4 +25,18 @@ public class GuildUserService
 
         return createdGuildUser.Entity;
     }
+
+    public async Task<GuildUser> AddToServer(AddToServerDTO addToServerDto)
+    {
+        await using var ctx = new AverBotContext();
+        
+        var guildUser =
+            await ctx.GuildUsers.FirstOrDefaultAsync(guildUser => guildUser.DiscordId == addToServerDto.GuildUserDiscordId);
+        if (guildUser == null) throw new BadHttpRequestException(ExceptionMessage.NotFound);
+
+        await ctx.ServerGuildUsers.AddAsync(new ServerGuildUser(addToServerDto.ServerId, guildUser.Id));
+        await ctx.SaveChangesAsync();
+
+        return guildUser;
+    }
 }
