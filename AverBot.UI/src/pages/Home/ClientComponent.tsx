@@ -25,8 +25,9 @@ const ClientComponent = () => {
         const asyncWrapper = async () => {
             if (connection.state === HubConnectionState.Disconnected) await connection.start()
 
-            connection.on("send", async data => {
-                setMessages(prevState => [...prevState, data])
+            connection.on("WarnCreated", async data => {
+                console.log('Data from asp.NET Core', data)
+                setMessages(prevState => [...prevState, data?.reason])
             })
         }
         void asyncWrapper()
@@ -38,7 +39,11 @@ const ClientComponent = () => {
     }
     const onClickButton = async () => {
         if (connection?.state !== HubConnectionState.Connected) return
-        await connection.send("Send", inputMessage)
+        await connection.send("Create", {
+            reason: inputMessage,
+            serverId: 1,
+            guildUserId: 1
+        })
         setInputMessage('')
     }
 

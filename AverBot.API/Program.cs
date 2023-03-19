@@ -12,6 +12,7 @@ builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton<AuthService>();
 builder.Services.AddSingleton<ServerService>();
 builder.Services.AddSingleton<GuildUserService>();
+builder.Services.AddSingleton<WarnService>();
 
 builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
 {
@@ -29,7 +30,8 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAuthorization();
+
+    builder.Services.AddAuthorization();
 builder.Services
     .AddAuthentication(AuthService.ConfigureAuthenticationOptions)
     .AddJwtBearer(AuthService.ConfigureJwtBearerOptions);
@@ -44,7 +46,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("CorsPolicy");
 
-app.MapHub<WarnsHub>("Hubs/Warns");
+app.MapHub<WarnHub>("Hubs/Warn");
 
 app.UseHttpsRedirection();
 app.UseAuthentication();

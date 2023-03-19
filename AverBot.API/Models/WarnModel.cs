@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using AverBot.API.DTO;
 
 namespace AverBot.API.Models;
 
@@ -31,11 +32,11 @@ public class Warn : BaseModel
     
     public Warn() {}
 
-    public Warn(string reason, int serverId, int guildUserId)
+    public Warn(CreateWarnDTO createWarnDto)
     {
-        Reason = reason;
-        ServerId = serverId;
-        GuildUserId = guildUserId;
+        Reason = createWarnDto.Reason;
+        ServerId = createWarnDto.ServerId;
+        GuildUserId = createWarnDto.GuildUserId;
     }
 }
 

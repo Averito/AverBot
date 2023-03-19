@@ -17,6 +17,7 @@
       <PackageReference Include="Discord.Net.Core" Version="3.9.0" />
       <PackageReference Include="Discord.Net.Interactions" Version="3.9.0" />
       <PackageReference Include="Discord.Net.WebSocket" Version="3.9.0" />
+      <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.4" />
       <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0-preview.2.23128.3" />
       <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0-preview.2.23128.3" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0-preview.2.23128.3" />

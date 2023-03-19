@@ -12,7 +12,7 @@ namespace AverBot.API.Controllers;
 [Route("[controller]")]
 public class ServerController : MainController<ServerController>
 {
-    public readonly ServerService _serverService;
+    private readonly ServerService _serverService;
     
     public ServerController(ILogger<ServerController> logger, ServerService serverService) : base(logger)
     {

@@ -11,7 +11,7 @@ namespace AverBot.API.Controllers;
 [Route("[controller]")]
 public class GuildUserController : MainController<GuildUserController>
 {
-    public readonly GuildUserService _guildUserService;
+    private readonly GuildUserService _guildUserService;
     
     public GuildUserController(ILogger<GuildUserController> logger, GuildUserService guildUserService) : base(logger)
     {
