@@ -45,7 +45,7 @@ public class AuthService
             await using var ctx = new AverBotContext();
 
             var user = await ctx.Users.FirstOrDefaultAsync(user => user.Id == loginDto.Id);
-            if (user == null) throw new BadHttpRequestException(ExceptionMessage.UserNotFound);
+            if (user == null) throw new BadHttpRequestException(ExceptionMessage.NotFound);
 
             var token = GenerateSecurityToken(loginDto.ExpiresIn, loginDto.Id);
 

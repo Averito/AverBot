@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using AverBot.API.DTO;
 
 namespace AverBot.API.Models;
 
@@ -27,12 +28,20 @@ public class Server : BaseModel
     [JsonPropertyName("userId")]
     public int UserId { get; set; }
     
+    [Column("warns")]
+    [JsonPropertyName("warns")]
+    public List<Warn> Warns { get; set; }
+    
+    [Column("server_guild_users")]
+    [JsonPropertyName("serverGuildUsers")]
+    public List<ServerGuildUser> ServerGuildUsers { get; set; }
+    
     public Server() {}
 
-    public Server(ulong discordId, string name, int userId)
+    public Server(CreateServerDTO createServerDto, int userId)
     {
-        DiscordId = discordId;
-        Name = name;
+        DiscordId = createServerDto.DiscordId;
+        Name = createServerDto.Name;
         UserId = userId;
     }
 }

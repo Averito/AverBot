@@ -11,9 +11,9 @@ public class UserService
     public async Task<User> GetUserById(int id)
     {
         await using var ctx = new AverBotContext();
+        
         var user = await ctx.Users.Include(user => user.Servers).FirstOrDefaultAsync(user => user.Id == id);
-
-        if (user == null) throw new BadHttpRequestException(ExceptionMessage.UserNotFound);
+        if (user == null) throw new BadHttpRequestException(ExceptionMessage.NotFound);
         
         return user;
     }
@@ -50,7 +50,7 @@ public class UserService
         await using var ctx = new AverBotContext();
 
         var user = ctx.Users.Include(user => user.Servers).FirstOrDefault(user => user.Id == userId);
-        if (user == null) throw new BadHttpRequestException(ExceptionMessage.UserNotFound);
+        if (user == null) throw new BadHttpRequestException(ExceptionMessage.NotFound);
 
         return user;
     }

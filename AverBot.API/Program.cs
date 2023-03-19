@@ -10,6 +10,7 @@ environmentsService.EnvironmentsLoad();
 builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton<AuthService>();
 builder.Services.AddSingleton<ServerService>();
+builder.Services.AddSingleton<GuildUserService>();
 
 builder.Services.AddDbContext<AverBotContext>();
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
