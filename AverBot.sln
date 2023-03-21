@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AverBot.Core", "AverBot.Core\AverBot.Core.csproj", "{EFF21B2A-68BB-4CA5-A981-FD53F365DA27}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AverBot.API", "AverBot.API\AverBot.API.csproj", "{69CF32F0-46A4-4222-8A69-4F1155DA51F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AverBot.Core", "AverBot.Core\AverBot.Core.csproj", "{AC5F4221-1CD0-458C-95AF-0D0796D24913}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,10 +12,10 @@ Global
 		{EFF21B2A-68BB-4CA5-A981-FD53F365DA27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFF21B2A-68BB-4CA5-A981-FD53F365DA27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFF21B2A-68BB-4CA5-A981-FD53F365DA27}.Release|Any CPU.Build.0 = Release|Any CPU
-		{69CF32F0-46A4-4222-8A69-4F1155DA51F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{69CF32F0-46A4-4222-8A69-4F1155DA51F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{69CF32F0-46A4-4222-8A69-4F1155DA51F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{69CF32F0-46A4-4222-8A69-4F1155DA51F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC5F4221-1CD0-458C-95AF-0D0796D24913}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC5F4221-1CD0-458C-95AF-0D0796D24913}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC5F4221-1CD0-458C-95AF-0D0796D24913}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC5F4221-1CD0-458C-95AF-0D0796D24913}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
