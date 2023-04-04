@@ -31,16 +31,15 @@ public class Server : BaseModel
     [Column("warns")]
     [JsonPropertyName("warns")]
     public List<Warn> Warns { get; set; }
-    
-    [Column("warns_limit")]
-    [Required]
-    [JsonPropertyName("warnsLimit")]
-    public int WarnsLimit { get; set; }
-    
+
     [Column("server_guild_users")]
     [JsonPropertyName("serverGuildUsers")]
     public List<ServerGuildUser> ServerGuildUsers { get; set; }
     
+    [Column("configuration")]
+    [JsonPropertyName("configuration")]
+    public Configuration Configuration { get; set; }
+
     public Server() {}
 
     public Server(CreateServerDTO createServerDto, int userId)

@@ -15,9 +15,25 @@ public class ServerService
         var server = await ctx.Servers
             .Include(server => server.User)
             .Include(server => server.Warns)
+            .Include(server => server.Configuration)
             .Include(server => server.ServerGuildUsers)
             .ThenInclude(serverGuildUser => serverGuildUser.GuildUser)
             .FirstOrDefaultAsync(server => server.Id == id);
+        if (server == null) throw new BadHttpRequestException(ExceptionMessage.NotFound);
+
+        return server;
+    }
+    public async Task<Server> GetByDiscordId(ulong discordId)
+    {
+        await using var ctx = new AverBotContext();
+
+        var server = await ctx.Servers
+            .Include(server => server.User)
+            .Include(server => server.Warns)
+            .Include(server => server.ServerGuildUsers)
+            .ThenInclude(serverGuildUser => serverGuildUser.GuildUser)
+            .Include(server => server.Configuration)
+            .FirstOrDefaultAsync(server => server.DiscordId == discordId);
         if (server == null) throw new BadHttpRequestException(ExceptionMessage.NotFound);
 
         return server;

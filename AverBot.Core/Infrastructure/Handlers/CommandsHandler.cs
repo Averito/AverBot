@@ -12,12 +12,12 @@ public class CommandsHandler
     private readonly DiscordSocketClient _client;
     private readonly InteractionService _interactionService;
 
-    public CommandsHandler(DiscordSocketClient client)
+    public CommandsHandler(DiscordSocketClient client, IServiceCollection serviceCollection)
     {
         _client = client;
         _commandService = new CommandService();
         _interactionService = new InteractionService(_client.Rest);
-        _services = new ServiceCollection()
+        _services = serviceCollection
             .AddSingleton(_client)
             .AddSingleton(_commandService)
             .AddSingleton(_interactionService)

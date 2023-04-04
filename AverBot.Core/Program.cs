@@ -9,20 +9,20 @@ var builder = WebApplication.CreateBuilder(args);
 var environmentsService = new EnvironmentService(@"D:\Averito\CSharp\AverBot\AverBot.Core\.env");
 environmentsService.EnvironmentsLoad();
 
-var botStartUpService = new BotStartupService();
+builder.Services.AddSingleton<UserService>();
+builder.Services.AddSingleton<AuthService>();
+builder.Services.AddSingleton<ServerService>();
+builder.Services.AddSingleton<GuildUserService>();
+builder.Services.AddSingleton<WarnService>();
+builder.Services.AddSingleton<ConfigurationService>();
+
+var botStartUpService = new BotStartupService(builder.Services);
 
 await botStartUpService.RegisterCommandsAsync();
 await botStartUpService.SubscribeDiscordEventsAsync();
 await botStartUpService.LoginDiscordAsync();
 await botStartUpService.StartDiscordAsync();
 await botStartUpService.SetDiscordActivityAsync(new WatchingActivity("на Арину"));
-
-builder.Services.AddSingleton(botStartUpService);
-builder.Services.AddSingleton<UserService>();
-builder.Services.AddSingleton<AuthService>();
-builder.Services.AddSingleton<ServerService>();
-builder.Services.AddSingleton<GuildUserService>();
-builder.Services.AddSingleton<WarnService>();
 
 builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
 {

@@ -44,12 +44,12 @@ public class AuthService
         {
             await using var ctx = new AverBotContext();
 
-            var user = await ctx.Users.FirstOrDefaultAsync(user => user.Id == loginDto.Id);
+            var user = await ctx.Users.FirstOrDefaultAsync(user => user.DiscordId == loginDto.DiscordId);
             if (user == null) throw new BadHttpRequestException(ExceptionMessage.NotFound);
 
-            var token = GenerateSecurityToken(loginDto.ExpiresIn, loginDto.Id);
+            var token = GenerateSecurityToken(loginDto.ExpiresIn, user.Id);
 
-            return new LoginResponseDTO(loginDto.Id, user.DiscordId, token);
+            return new LoginResponseDTO(user.Id, user.DiscordId, token);
         }
         catch (Exception exception)
         {

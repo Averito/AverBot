@@ -10,6 +10,7 @@ public class AverBotContext : DbContext
     public DbSet<ServerGuildUser> ServerGuildUsers { get; set; }
     public DbSet<GuildUser> GuildUsers { get; set; }
     public DbSet<Warn> Warns { get; set; }
+    public DbSet<Configuration> Configurations { get; set; }
 
     public AverBotContext()
     {
@@ -49,7 +50,7 @@ public class AverBotContext : DbContext
             .WithOne(warn => warn.Server)
             .HasForeignKey(warn => warn.ServerId)
             .IsRequired();
-        
+
         builder.Entity<ServerGuildUser>()
             .HasKey(serverGuildUser => new { serverGuildUser.ServerId, serverGuildUser.GuildUserId });  
         builder.Entity<ServerGuildUser>()

@@ -31,4 +31,14 @@ public class WarnService
         
         return createdWarn.Entity;
     }
+    public async Task<Warn> Create(CreateWarnDTO createWarnDto)
+    {
+        await using var ctx = new AverBotContext();
+
+        var newWarn = new Warn(createWarnDto);
+        var createdWarn = await ctx.Warns.AddAsync(newWarn);
+        await ctx.SaveChangesAsync();
+
+        return createdWarn.Entity;
+    }
 }

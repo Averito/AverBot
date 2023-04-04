@@ -2,12 +2,12 @@
 
 public class LoginDTO
 {
-    public int Id { get; }
+    public ulong DiscordId { get; }
     public DateTime ExpiresIn { get; }
 
-    public LoginDTO(int id, DateTime expiresIn)
+    public LoginDTO(ulong discordId, DateTime expiresIn)
     {
-        Id = id;
+        DiscordId = discordId;
         ExpiresIn = expiresIn;
     }
 }

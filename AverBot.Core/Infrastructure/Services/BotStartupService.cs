@@ -1,5 +1,7 @@
 ﻿using AverBot.Core.Infrastructure.Handlers;
 using Discord;
+using Discord.Commands;
+using Discord.Interactions;
 using Discord.WebSocket;
 
 namespace AverBot.Core.Infrastructure.Services;
@@ -12,8 +14,8 @@ public class BotStartupService
         get => _client;
     }
     private readonly CommandsHandler _commandsHandler;
-    
-    public BotStartupService()
+
+    public BotStartupService(IServiceCollection serviceCollection)
     {
         _client = new DiscordSocketClient(new ()
         {
@@ -21,7 +23,7 @@ public class BotStartupService
             UseInteractionSnowflakeDate = true
         });
         
-        _commandsHandler = new CommandsHandler(_client);
+        _commandsHandler = new CommandsHandler(_client, serviceCollection);
     }
 
     public async Task LoginDiscordAsync()

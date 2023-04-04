@@ -8,6 +8,15 @@ namespace AverBot.Core.Infrastructure.Services;
 
 public class GuildUserService
 {
+    public async Task<GuildUser> GetByDiscordId(ulong discordId)
+    {
+        await using var ctx = new AverBotContext();
+
+        var guildUser = await ctx.GuildUsers.FirstOrDefaultAsync(guildUser => guildUser.DiscordId == discordId);
+        if (guildUser == null) throw new BadHttpRequestException(ExceptionMessage.NotFound);
+
+        return guildUser;
+    }
     public async Task<GuildUser> Create(CreateGuildUserDTO createGuildUserDto, int serverId)
     {
         await using var ctx = new AverBotContext();
