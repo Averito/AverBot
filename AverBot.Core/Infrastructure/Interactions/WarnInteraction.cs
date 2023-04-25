@@ -11,14 +11,12 @@ namespace AverBot.Core.Infrastructure.Interactions;
 public class WarnInteraction : MainInteractionModule
 {
     private readonly WarnService _warnService;
-    private readonly GuildUserService _guildUserService;
     private readonly ServerService _serverService;
     private readonly ConfigurationPunishmentService _configurationPunishmentService;
 
-    public WarnInteraction(WarnService warnService, GuildUserService guildUserService, ServerService serverService, ConfigurationPunishmentService configurationPunishmentService)
+    public WarnInteraction(WarnService warnService, ServerService serverService, ConfigurationPunishmentService configurationPunishmentService)
     {
         _warnService = warnService;
-        _guildUserService = guildUserService;
         _serverService = serverService;
         _configurationPunishmentService = configurationPunishmentService;
     }
@@ -47,7 +45,7 @@ public class WarnInteraction : MainInteractionModule
         var guildUser = (SocketGuildUser?)user;
         if (guildUser == null) return;
 
-        var createWarnDto = new CreateWarnDTO(reason, CurrentUser.Guild.Id, user.Id);
+        var createWarnDto = new CreateWarnDTO(reason, currentServer.Id, user.Id);
         await _warnService.Create(createWarnDto);
 
         foreach (var punishment in punishments)

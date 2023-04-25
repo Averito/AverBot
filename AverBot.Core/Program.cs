@@ -12,7 +12,6 @@ environmentsService.EnvironmentsLoad();
 builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton<AuthService>();
 builder.Services.AddSingleton<ServerService>();
-builder.Services.AddSingleton<GuildUserService>();
 builder.Services.AddSingleton<WarnService>();
 builder.Services.AddSingleton<ConfigurationService>();
 builder.Services.AddSingleton<ConfigurationPunishmentService>();

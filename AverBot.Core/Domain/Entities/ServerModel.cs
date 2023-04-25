@@ -32,10 +32,6 @@ public class Server : BaseModel
     [JsonPropertyName("warns")]
     public List<Warn> Warns { get; set; }
 
-    [Column("server_guild_users")]
-    [JsonPropertyName("serverGuildUsers")]
-    public List<ServerGuildUser> ServerGuildUsers { get; set; }
-    
     [Column("configuration")]
     [JsonPropertyName("configuration")]
     public Configuration Configuration { get; set; }

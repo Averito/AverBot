@@ -11,15 +11,10 @@ public class Warn : BaseModel
     [Required]
     [JsonPropertyName("reason")]
     public string Reason { get; set; }
-    
-    [Column("guild_user")]
-    [ForeignKey("GuildUserId")]
-    [JsonPropertyName("guildUser")]
-    public GuildUser? GuildUser { get; set; }
-    
+
     [Column("guild_user_id")]
     [JsonPropertyName("guildUserId")]
-    public int GuildUserId { get; set; }
+    public ulong GuildUserDiscordId { get; set; }
     
     [Column("server")]
     [ForeignKey("ServerId")]
@@ -36,7 +31,7 @@ public class Warn : BaseModel
     {
         Reason = createWarnDto.Reason;
         ServerId = createWarnDto.ServerId;
-        GuildUserId = createWarnDto.GuildUserId;
+        GuildUserDiscordId = createWarnDto.GuildUserDiscordId;
     }
 }
 

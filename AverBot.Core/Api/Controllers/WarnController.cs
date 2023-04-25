@@ -18,6 +18,6 @@ public class WarnController : MainController<WarnController>
     }
 
     [HttpGet("GetWarns")]
-    public async Task<ActionResult<List<Warn>>> GetWarnsByGuildUserIdAndServerId(int guildUserId, int serverId) =>
-        Ok(await _warnService.GetWarnsByGuildUserIdAndServerId(guildUserId, serverId));
+    public async Task<ActionResult<List<Warn>>> GetWarnsByGuildUserIdAndServerId(ulong guildUserDiscordId, int serverId) =>
+        Ok(await _warnService.GetWarnsByGuildUserDiscordIdAndServerId(guildUserDiscordId, serverId));
 }

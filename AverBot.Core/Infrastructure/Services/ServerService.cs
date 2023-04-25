@@ -16,8 +16,6 @@ public class ServerService
             .Include(server => server.User)
             .Include(server => server.Warns)
             .Include(server => server.Configuration)
-            .Include(server => server.ServerGuildUsers)
-            .ThenInclude(serverGuildUser => serverGuildUser.GuildUser)
             .FirstOrDefaultAsync(server => server.Id == id);
         if (server == null) throw new BadHttpRequestException(ExceptionMessage.NotFound);
 
@@ -31,8 +29,6 @@ public class ServerService
             .Include(server => server.User)
             .Include(server => server.Warns)
             .Include(server => server.Configuration)
-            .Include(server => server.ServerGuildUsers)
-            .ThenInclude(serverGuildUser => serverGuildUser.GuildUser)
             .FirstOrDefaultAsync(server => server.DiscordId == discordId);
         if (server == null) throw new BadHttpRequestException(ExceptionMessage.NotFound);
 

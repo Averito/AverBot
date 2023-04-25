@@ -8,12 +8,12 @@ namespace AverBot.Core.Infrastructure.Services;
 
 public class WarnService
 {
-    public async Task<List<Warn>> GetWarnsByGuildUserIdAndServerId(int guildUserId, int serverId)
+    public async Task<List<Warn>> GetWarnsByGuildUserDiscordIdAndServerId(ulong guildUserDiscordId, int serverId)
     {
         await using var ctx = new AverBotContext();
 
         var warns = await ctx.Warns
-            .Where(warn => warn.GuildUserId == guildUserId && warn.ServerId == serverId)
+            .Where(warn => warn.GuildUserDiscordId == guildUserDiscordId && warn.ServerId == serverId)
             .ToListAsync();
 
         return warns;
@@ -24,9 +24,8 @@ public class WarnService
         await using var ctx = new AverBotContext();
 
         var warns = await ctx.Warns
-            .Include(warn => warn.GuildUser)
             .Include(warn => warn.Server)
-            .Where(warn => warn.GuildUser.DiscordId == guildUserDiscordId && warn.Server.DiscordId == serverDiscordId)
+            .Where(warn => warn.GuildUserDiscordId == guildUserDiscordId && warn.Server.DiscordId == serverDiscordId)
             .ToListAsync();
 
         return warns;
