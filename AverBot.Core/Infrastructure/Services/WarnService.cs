@@ -19,6 +19,19 @@ public class WarnService
         return warns;
     }
     
+    public async Task<List<Warn>> GetWarnsByGuildUserDiscordIdAndServerDiscordId(ulong guildUserDiscordId, ulong serverDiscordId)
+    {
+        await using var ctx = new AverBotContext();
+
+        var warns = await ctx.Warns
+            .Include(warn => warn.GuildUser)
+            .Include(warn => warn.Server)
+            .Where(warn => warn.GuildUser.DiscordId == guildUserDiscordId && warn.Server.DiscordId == serverDiscordId)
+            .ToListAsync();
+
+        return warns;
+    }
+    
     public async Task<Warn> Create(IHubCallerClients hubCallerClients, CreateWarnDTO createWarnDto)
     {
         await using var ctx = new AverBotContext();

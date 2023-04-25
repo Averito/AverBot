@@ -17,11 +17,6 @@ public class UserController : MainController<UserController>
     {
         _userService = userService;
     }
-    
-    [HttpGet("{id}")]
-    public async Task<ActionResult<List<User>>> GetById(int id) => 
-        Ok(await _userService.GetUserById(id));
-
 
     [HttpPatch("Edit")]
     public async Task<ActionResult<User>> Edit(EditUserDTO editUserDto)

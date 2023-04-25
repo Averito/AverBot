@@ -30,9 +30,9 @@ public class ServerService
         var server = await ctx.Servers
             .Include(server => server.User)
             .Include(server => server.Warns)
+            .Include(server => server.Configuration)
             .Include(server => server.ServerGuildUsers)
             .ThenInclude(serverGuildUser => serverGuildUser.GuildUser)
-            .Include(server => server.Configuration)
             .FirstOrDefaultAsync(server => server.DiscordId == discordId);
         if (server == null) throw new BadHttpRequestException(ExceptionMessage.NotFound);
 
@@ -50,5 +50,16 @@ public class ServerService
         await ctx.SaveChangesAsync();
 
         return createdServer.Entity;
+    }
+    
+    public int GetCurrentServerIdFromHttpContext(HttpContext httpContext)
+    {
+        var currentServerIdString = httpContext?.User?.Claims.ToList()[1].Value;
+        int currentServerId;
+
+        var canConvert = int.TryParse(currentServerIdString, out currentServerId);
+        if (!canConvert) throw new BadHttpRequestException(ExceptionMessage.CurrentServerIdNotValid);
+
+        return currentServerId;
     }
 }

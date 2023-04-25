@@ -19,10 +19,6 @@ public class ServerController : MainController<ServerController>
         _serverService = serverService;
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Server>> GetById(int id) =>
-        Ok(await _serverService.GetById(id));
-
     [HttpPost("Create")]
     public async Task<ActionResult<Server>> Create(CreateServerDTO createServerDto)
     {

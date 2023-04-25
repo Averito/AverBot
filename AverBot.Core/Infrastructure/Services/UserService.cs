@@ -42,7 +42,7 @@ public class UserService
 
         return userId;
     }
-    
+
     public async Task<User> Me(HttpContext httpContext)
     {
         var userId = GetUserIdFromHttpContext(httpContext);

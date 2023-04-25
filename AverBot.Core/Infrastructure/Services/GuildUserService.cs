@@ -35,7 +35,7 @@ public class GuildUserService
         return createdGuildUser.Entity;
     }
 
-    public async Task<GuildUser> AddToServer(AddToServerDTO addToServerDto)
+    public async Task<GuildUser> AddToServer(AddToServerDTO addToServerDto, int serverId)
     {
         await using var ctx = new AverBotContext();
         
@@ -43,7 +43,7 @@ public class GuildUserService
             await ctx.GuildUsers.FirstOrDefaultAsync(guildUser => guildUser.DiscordId == addToServerDto.GuildUserDiscordId);
         if (guildUser == null) throw new BadHttpRequestException(ExceptionMessage.NotFound);
 
-        await ctx.ServerGuildUsers.AddAsync(new ServerGuildUser(addToServerDto.ServerId, guildUser.Id));
+        await ctx.ServerGuildUsers.AddAsync(new ServerGuildUser(serverId, guildUser.Id));
         await ctx.SaveChangesAsync();
 
         return guildUser;

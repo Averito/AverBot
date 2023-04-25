@@ -11,6 +11,7 @@ public class AverBotContext : DbContext
     public DbSet<GuildUser> GuildUsers { get; set; }
     public DbSet<Warn> Warns { get; set; }
     public DbSet<Configuration> Configurations { get; set; }
+    public DbSet<ConfigurationPunishment> ConfigurationPunishments { get; set; }
 
     public AverBotContext()
     {
@@ -69,6 +70,15 @@ public class AverBotContext : DbContext
             .HasMany(guildUser => guildUser.Warns)
             .WithOne(warn => warn.GuildUser)
             .HasForeignKey(warn => warn.GuildUserId)
+            .IsRequired();
+
+        builder.Entity<Configuration>()
+            .HasIndex(configuration => configuration.ServerId).IsUnique();
+
+        builder.Entity<ConfigurationPunishment>()
+            .HasOne(configurationPunishments => configurationPunishments.Configuration)
+            .WithMany(configuration => configuration.Punishments)
+            .HasForeignKey(configurationPunishments => configurationPunishments.ConfigurationId)
             .IsRequired();
 
         base.OnModelCreating(builder);

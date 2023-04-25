@@ -38,25 +38,48 @@ public class AuthService
             throw new BadHttpRequestException(exception.Message);
         }
     }
-    public async Task<LoginResponseDTO> Login(LoginDTO loginDto)
+    public async Task<string> SwitchServer(SwitchServerDTO switchServerDto, int userId)
     {
         try
         {
             await using var ctx = new AverBotContext();
-
-            var user = await ctx.Users.FirstOrDefaultAsync(user => user.DiscordId == loginDto.DiscordId);
+            
+            var user = await ctx.Users
+                .Include(user => user.Servers)
+                .FirstOrDefaultAsync(user => user.Id == userId);
             if (user == null) throw new BadHttpRequestException(ExceptionMessage.NotFound);
 
-            var token = GenerateSecurityToken(loginDto.ExpiresIn, user.Id);
+            var server = user.Servers.FirstOrDefault(server => server.Id == switchServerDto.ServerId);
+            if (server == null) throw new BadHttpRequestException(ExceptionMessage.ServerNotFound);
 
-            return new LoginResponseDTO(user.Id, user.DiscordId, token);
+            return GenerateSecurityToken(switchServerDto.ExpiresIn, user.Id, server.Id);
         }
         catch (Exception exception)
         {
             throw new BadHttpRequestException(exception.Message);
         }
     }
-    private string? GenerateSecurityToken(DateTime expiresIn, int id)
+    public async Task<LoginResponseDTO> Login(LoginDTO loginDto)
+    {
+        try
+        {
+            await using var ctx = new AverBotContext();
+
+            var user = await ctx.Users
+                .Include(user => user.Servers)
+                .FirstOrDefaultAsync(user => user.DiscordId == loginDto.DiscordId);
+            if (user == null) throw new BadHttpRequestException(ExceptionMessage.NotFound);
+
+            var token = GenerateSecurityToken(loginDto.ExpiresIn, user.Id, user.Servers[0].Id);
+
+            return new LoginResponseDTO(user.Id, user.DiscordId, user.Servers[0].Id, token);
+        }
+        catch (Exception exception)
+        {
+            throw new BadHttpRequestException(exception.Message);
+        }
+    }
+    private string? GenerateSecurityToken(DateTime expiresIn, int id, int currentServerId = 0)
     {
         var jwtSercet = Environment.GetEnvironmentVariable("JWT_SECRET");
         if (jwtSercet == null) return null;
@@ -69,6 +92,7 @@ public class AuthService
         {
             Subject = new ClaimsIdentity(new [] {
                 new Claim("id", id.ToString()),
+                new Claim("serverId", currentServerId.ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti,
                     Guid.NewGuid().ToString())
             }),

@@ -15,6 +15,7 @@ builder.Services.AddSingleton<ServerService>();
 builder.Services.AddSingleton<GuildUserService>();
 builder.Services.AddSingleton<WarnService>();
 builder.Services.AddSingleton<ConfigurationService>();
+builder.Services.AddSingleton<ConfigurationPunishmentService>();
 
 var botStartUpService = new BotStartupService(builder.Services);
 
@@ -22,7 +23,7 @@ await botStartUpService.RegisterCommandsAsync();
 await botStartUpService.SubscribeDiscordEventsAsync();
 await botStartUpService.LoginDiscordAsync();
 await botStartUpService.StartDiscordAsync();
-await botStartUpService.SetDiscordActivityAsync(new WatchingActivity("на Арину"));
+await botStartUpService.SetDiscordActivityAsync(new WatchingActivity("на Данила"));
 
 builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
 {

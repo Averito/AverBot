@@ -11,6 +11,10 @@ public class Configuration : BaseModel
     [JsonPropertyName("warnsLimit")]
     public int WarnsLimit { get; set; }
     
+    [Column("punishments")]
+    [JsonPropertyName("punishments")]
+    public List<ConfigurationPunishment> Punishments { get; set; }
+
     [Column("server")]
     [ForeignKey("ServerId")]
     [JsonPropertyName("server")]
